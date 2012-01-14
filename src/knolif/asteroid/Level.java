@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import knolif.asteroid.effects.Death;
 import knolif.asteroid.effects.Effect;
 import knolif.asteroid.effects.PlayerDeath;
+import knolif.asteroid.entity.BabyChaserMob;
 import knolif.asteroid.entity.ChaserMob;
 import knolif.asteroid.entity.Entity;
+import knolif.asteroid.entity.ExploderMob;
 import knolif.asteroid.entity.Monster;
-import knolif.asteroid.entity.Player;
 import knolif.asteroid.entity.RandomMob;
 
 public class Level {
@@ -36,7 +36,10 @@ public class Level {
 		if (Objects < maxObjects) {
 			if (rand.nextInt(10) == 0) {
 				Objects++;
-				if (rand.nextInt(8) == 0) {
+				if (rand.nextInt(1) == 0) {
+					entities.add(new ExploderMob(this));
+				}
+				else if (rand.nextInt(8) == 0) {
 					entities.add(new ChaserMob(this, game.player));
 				}
 				else {entities.add(new RandomMob(this));}
@@ -46,9 +49,7 @@ public class Level {
 			Effect e = background.get(i);
 			e.tick();
 			if (e.remove) {
-				if (e instanceof PlayerDeath) {
-					game.restart();
-				}
+				if (e instanceof PlayerDeath) {game.restart();}
 				background.remove(i--);
 			} 
 		}
@@ -57,11 +58,11 @@ public class Level {
 			e.tick();
 			if (e.remove) {
 				if (e instanceof Monster) {Objects--;}
-				if (e instanceof Player) {
-					background.add(new PlayerDeath(this,e.color, (int)e.x, (int)e.y, e.size));
-				}
-				if (e.blownup) {
-					background.add(new Death(this,e.color, (int)e.x, (int)e.y, e.size));
+				if (e instanceof ExploderMob) {
+					if (e.blownup)
+					for (int a = 0; a < rand.nextInt(2)+3; a++) {
+						entities.add(new BabyChaserMob(this, game.player, e.x, e.y));
+					}
 				}
 				entities.remove(i--);
 			} 

@@ -3,11 +3,11 @@ package knolif.asteroid.entity;
 import java.awt.Color;
 
 import knolif.asteroid.Level;
+import knolif.asteroid.effects.Death;
 
 
 public class Monster extends Entity {
-	int dir;
-	float speed;
+	int damage = 25;
 	public Monster(Level level) {
 		
 		x = 1 + rand.nextInt(level.width-2);
@@ -24,13 +24,15 @@ public class Monster extends Entity {
 		dir = rand.nextInt(360);
 		speed = rand.nextFloat()+0.1f + rand.nextFloat();
 		this.level = level;
-		color = new Color(rand.nextInt(4)*16+128,rand.nextInt(4)*16+128,rand.nextInt(4)*16+128);
+		color[0] = new Color(rand.nextInt(4)*16+128,rand.nextInt(4)*16+128,rand.nextInt(4)*16+128);
 	}
 	
-	protected void isDead() {
+	protected void isDead() { 
 		if (!draw(-20,-20,level.width+20,level.height+20)) {remove = true;}
 		if (intersects(level.game.player)) {
-			level.game.player.remove = true;
+			level.game.player.hurt(damage);
+			level.background.add(new Death(level, color[0], (int)x, (int)y, size));
+			remove = true;
 		}
 	}
 	protected void move() {

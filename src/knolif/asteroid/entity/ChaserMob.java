@@ -13,8 +13,8 @@ public class ChaserMob extends Monster {
 		super(level);
 		this.player = player;
 		size = 8;
-		color = new Color(50,100,50);
-		maxspeed = 1.0f;
+		color[0] = new Color(50,255,50);
+		maxspeed = 1.5f;
 		speed = 0.1f;
 		// TODO Auto-generated constructor stub
 	}

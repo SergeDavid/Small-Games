@@ -21,15 +21,23 @@ public class Player extends Entity {
 		this.input = input;
 		this.level = level;
 		level.entities.add(this);
-		color = new Color(0,0,0);
-		color2 = new Color(22,22,22);
-		color3 = new Color(255,0,0);
+		color[0] = new Color(0,0,0);
+		color[1] = new Color(22,22,22);
+		color[2] = new Color(255,0,0);
 		size = 15;
 		x = level.width/2;
 		y = level.height/2;
 	}
 	
-	public void tick() {
+	protected void isDead() {
+		loopAround();
+		if (life <= 0) {
+			remove = true;
+			level.background.add(new PlayerDeath(level, color[0], (int)x, (int)y, size));
+		}
+	}
+
+	protected void move() {
 		int xlook = 0; int ylook = 0;
 		if (input.up2.down) {ylook--;} if (input.down2.down) {ylook++;}
 		if (input.left2.down) {xlook--;} if (input.right2.down) {xlook++;}
@@ -49,10 +57,10 @@ public class Player extends Entity {
 		
 		if (input.attack.down) {
 			if (delayshot<=0) {
-			  level.entities.add(new Bullet(level,this,0));
+			  //level.entities.add(new Bullet(level,this,0));
 			  for (int i=1; i<bullets; i++) {
-				  level.entities.add(new Bullet(level,this,(0.2f*i)));
-				  level.entities.add(new Bullet(level,this,(-0.2f*i)));
+				  level.entities.add(new Bullet(level,this,(0.1f*i)));
+				  level.entities.add(new Bullet(level,this,(-0.1f*i)));
 			  }
 			  delayshot = maxdelayshot;
 			}
@@ -75,11 +83,11 @@ public class Player extends Entity {
 	public void render(Graphics g) {
 		int xx = (int) (x-size);
 		int yy = (int) (y-size);
-		g.setColor(color);
+		g.setColor(color[0]);
 		g.fillOval(xx,yy,size*2,size*2);
-		g.setColor(color2);
+		g.setColor(color[1]);
 		g.fillOval(xx+4,yy+2,size+4,size+4);
-		g.setColor(color3);
+		g.setColor(color[2]);
 		xx = (int)x+(xlook*8)-4;
 		yy = (int)y+(ylook*8)-4;
 		g.fillOval(xx, yy, 8, 8);

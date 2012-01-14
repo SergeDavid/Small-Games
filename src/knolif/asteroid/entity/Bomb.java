@@ -13,7 +13,7 @@ public class Bomb extends Entity {
 	
 	public Bomb(Level level, Entity ply) {
 		this.level = level;
-		color = new Color(199, 255, 210);
+		color[0] = new Color(199, 255, 210);
 		size = 2;
 		x = ply.x + ply.xdir*4;
 		y = ply.y + ply.ydir*4;
@@ -44,7 +44,7 @@ public class Bomb extends Entity {
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(color);
+		g.setColor(color[0]);
 		int size2 = size;
 		for (int i=0; i<5; i++) {
 			int xx = (int) (x-size2);

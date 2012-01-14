@@ -95,7 +95,9 @@ public class SimpleGame extends Canvas implements Runnable {
 		
 		level.render(g);
 		g.setColor(new Color(255,255,255));
+	    
 		g.drawString("Score :" + score, 20, 20);
+		g.drawString("Health :" + player.life, 20, 50);
 		if (player.remove == true) {
 			g.drawString("Game Over", 200, 200);
 		}
