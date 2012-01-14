@@ -3,7 +3,6 @@ package knolif.asteroid.entity;
 import java.awt.Color;
 
 import knolif.asteroid.Level;
-import knolif.asteroid.effects.Death;
 
 public class Bullet extends Entity {
 	int life;
@@ -32,7 +31,7 @@ public class Bullet extends Entity {
 					level.game.score++;
 					e.blownup = true;
 					e.remove = true;
-					level.background.add(new Death(level,e.color[0], (int)e.x, (int)e.y, e.size));
+					e.dieEffect();
 					remove = true;
 				}
 			}

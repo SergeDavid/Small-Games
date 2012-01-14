@@ -107,6 +107,12 @@ public class SimpleGame extends Canvas implements Runnable {
 			g.drawString("Game Over", 200, 200);
 		}
 		
+		g.setColor(new Color(120,120,120));
+		g.fillRect(4, HEIGHT*SCALE-6, 200, 6);
+		g.setColor(new Color(255,0,0));
+		g.fillRect(4, HEIGHT*SCALE-6, (int)(player.maxdelaybomb-player.delaybomb), 6);
+		
+		
 		g.dispose();
 		bs.show();
 	}

@@ -20,8 +20,8 @@ public class Bomb extends Entity {
 		xdir = ply.xdir;
 		ydir = ply.ydir;
 		growth = 1f;
-		increase = 0.25f;
-		life = 30;
+		increase = 0.35f;
+		life = 35;
 		owner = ply;
 	}
 	
@@ -33,6 +33,7 @@ public class Bomb extends Entity {
 				if (e instanceof Monster) {
 					level.game.score++;
 					e.blownup = true;
+					e.dieEffect();
 					e.remove = true;
 				}
 			}

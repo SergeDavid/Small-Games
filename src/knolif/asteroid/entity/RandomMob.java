@@ -6,8 +6,8 @@ public class RandomMob extends Monster {
 
 	public RandomMob(Level level) {
 		super(level);
-		// TODO Auto-generated constructor stub
-		damage = 15;
+		size = 3 + rand.nextInt(20);
+		damage = (int) (size/1.5);
 	}
 
 }

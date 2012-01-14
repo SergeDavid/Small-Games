@@ -82,7 +82,7 @@ public class InputHandler implements KeyListener {
 		if (ke.getKeyCode() == KeyEvent.VK_RIGHT) right2.toggle(pressed);
 		
 		if (ke.getKeyCode() == KeyEvent.VK_SPACE) attack.toggle(pressed);
-		if (ke.getKeyCode() == KeyEvent.VK_Z) extra.toggle(pressed);
+		if (ke.getKeyCode() == KeyEvent.VK_SHIFT) extra.toggle(pressed);
 	}
 
 	public void keyTyped(KeyEvent ke) {

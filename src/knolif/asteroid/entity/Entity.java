@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.util.Random;
 
 import knolif.asteroid.Level;
+import knolif.asteroid.effects.Death;
 
 public class Entity {
 	Random rand = new Random();
@@ -33,11 +34,16 @@ public class Entity {
 		move();
 		if (hurttime>0) {
 			hurttime--;
-			if (hurttime==0) {
-				//color = invertColor(color);
-			}
+			if (hurttime==0) {removehurt();}
 		}
 	}
+	protected void dieEffect() {
+		level.background.add(new Death(level, color[0], (int)x, (int)y, size));
+	}
+	/**For player image*/
+	protected void showhurt() {}
+	/**For player image*/
+	protected void removehurt() {}
 	/**Part of tick*/
 	protected void isDead() {}
 	/**Part of tick*/
@@ -68,22 +74,13 @@ public class Entity {
 		g.setColor(color[0]);
 		g.fillOval(xx,yy,size*2,size*2);
 	}
-	protected Color[] invertColor(Color[] color) {
-		for (int i = 0; i < color.length; i++) {
-			Color c = color[i];
-			System.out.println(255 - c.getRed());
-			int r = 255 - c.getRed();
-			int g = 255 - c.getGreen();
-			int b = 255 - c.getBlue();
-			color[i] = new Color(r,b,g);
-		}
-		return color;
-	}
 	
 	public void hurt(int damage) {
-		life-=damage;
-		//if (hurttime==0) {color = invertColor(color);}
-		hurttime = hurtlength;
+		if (hurttime==0) {
+			showhurt();
+			life-=damage;
+			hurttime = hurtlength;
+		}
 	}
 	
 	protected void loopAround() {

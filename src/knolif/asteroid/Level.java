@@ -38,9 +38,9 @@ public class Level {
 			if (rand.nextInt(10) == 0) {
 				int r = rand.nextInt(99);
 				Objects++;
-				if (r<15) {entities.add(new ExploderMob(this));}
-				else if (r<40) {entities.add(new ChaserMob(this, game.player));}
-				else if (r<50) {entities.add(new HugeMob(this));}
+				if (r<14) {entities.add(new ChaserMob(this, game.player));}
+				else if (r<22) {entities.add(new HugeMob(this));}
+				else if (r<30) {entities.add(new ExploderMob(this));}
 				else {entities.add(new RandomMob(this));}
 			}
 		}

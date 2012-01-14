@@ -14,8 +14,9 @@ public class ChaserMob extends Monster {
 		super(level);
 		this.player = player;
 		size = 8;
-		color[0] = new Color(50,255,50);
-		maxspeed = 1.5f;
+		color[0] = new Color(50,190,50);
+		maxspeed = 0.8f + rand.nextFloat();
+		if (maxspeed>1.65f) {maxspeed=1.65f;}
 		speed = 0.1f;
 		damage = 7;
 		distance = 30;
