@@ -11,6 +11,7 @@ import knolif.asteroid.entity.BabyChaserMob;
 import knolif.asteroid.entity.ChaserMob;
 import knolif.asteroid.entity.Entity;
 import knolif.asteroid.entity.ExploderMob;
+import knolif.asteroid.entity.HugeMob;
 import knolif.asteroid.entity.Monster;
 import knolif.asteroid.entity.RandomMob;
 
@@ -35,13 +36,11 @@ public class Level {
 	public void tick() {
 		if (Objects < maxObjects) {
 			if (rand.nextInt(10) == 0) {
+				int r = rand.nextInt(99);
 				Objects++;
-				if (rand.nextInt(1) == 0) {
-					entities.add(new ExploderMob(this));
-				}
-				else if (rand.nextInt(8) == 0) {
-					entities.add(new ChaserMob(this, game.player));
-				}
+				if (r<15) {entities.add(new ExploderMob(this));}
+				else if (r<40) {entities.add(new ChaserMob(this, game.player));}
+				else if (r<50) {entities.add(new HugeMob(this));}
 				else {entities.add(new RandomMob(this));}
 			}
 		}

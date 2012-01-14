@@ -9,6 +9,7 @@ public class ChaserMob extends Monster {
 	float maxspeed;
 	float xdir;
 	float ydir;
+	float distance;
 	public ChaserMob(Level level, Player player) {
 		super(level);
 		this.player = player;
@@ -16,10 +17,9 @@ public class ChaserMob extends Monster {
 		color[0] = new Color(50,255,50);
 		maxspeed = 1.5f;
 		speed = 0.1f;
-		// TODO Auto-generated constructor stub
+		damage = 7;
+		distance = 30;
 	}
-	
-	float distance = 10;
 	protected void move() {
 		if (player.x > x + distance) {
 			xdir += speed;

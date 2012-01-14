@@ -4,7 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
@@ -13,12 +13,14 @@ import knolif.asteroid.entity.Player;
 
 public class SimpleGame extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
-	public static final String NAME = "Something";
+	public static final String NAME = "Asteroids";
 	public static final int HEIGHT = 120;
 	public static final int WIDTH = 160;
 	private static final int SCALE = 3;
 	private boolean running = false;
+	
 	public int score = 0;
+	public int highscore = 0;
 	
 	Level level;
 	public Player player;
@@ -32,6 +34,7 @@ public class SimpleGame extends Canvas implements Runnable {
 		running = false;
 	}
 	public void restart() {
+		if (score>highscore) {highscore = score;}
 		score = 0;
 		level = new Level(HEIGHT*SCALE,WIDTH*SCALE, this);
 		player = new Player(level,input);
@@ -90,14 +93,16 @@ public class SimpleGame extends Canvas implements Runnable {
 			requestFocus();
 			return;
 		}
-		Graphics g = bs.getDrawGraphics();
+		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
 		level.render(g);
 		g.setColor(new Color(255,255,255));
-	    
-		g.drawString("Score :" + score, 20, 20);
-		g.drawString("Health :" + player.life, 20, 50);
+		
+	    String hsm = (score>=highscore) ? "! High Score !" : "highscore : " + highscore ;
+		g.drawString("Score :" + score, 10, 15);
+		g.drawString(hsm, 10, 30);
+		g.drawString("Health :" + player.life, 10, 45);
 		if (player.remove == true) {
 			g.drawString("Game Over", 200, 200);
 		}

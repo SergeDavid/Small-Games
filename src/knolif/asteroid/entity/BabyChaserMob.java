@@ -9,7 +9,8 @@ public class BabyChaserMob extends ChaserMob {
 		this.x = x + rand.nextInt(5)-2;
 		this.y = y + rand.nextInt(5)-2;
 		maxspeed = 0.75f;
-		damage = 5;
+		damage = 4;
+		distance = 50;
 	}
 
 }

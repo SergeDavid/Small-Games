@@ -34,7 +34,7 @@ public class Entity {
 		if (hurttime>0) {
 			hurttime--;
 			if (hurttime==0) {
-				color = invertColor(color);
+				//color = invertColor(color);
 			}
 		}
 	}
@@ -44,6 +44,22 @@ public class Entity {
 	protected void move() {
 		x = (float) (x - speed * Math.sin(dir));
 		y = (float) (y + speed * Math.cos(dir));
+	}
+	/**To hell with everything about directions.*/
+	protected double getDir(int i) {
+		double pi = Math.PI;
+		double out = 0;
+		switch (i) {
+		case 32:out = 0;break;
+		case 31:out = pi/4;break;
+		case 21:out = pi/2;break;
+		case 11:out = pi-pi/4;break;
+		case 12:out = pi;break;
+		case 13:out = pi+pi/4;break;
+		case 23:out = -pi/2;break;
+		case 33:out = -pi/4;break;
+		}
+		return out;
 	}
 	
 	public void render(Graphics g) {
@@ -55,6 +71,7 @@ public class Entity {
 	protected Color[] invertColor(Color[] color) {
 		for (int i = 0; i < color.length; i++) {
 			Color c = color[i];
+			System.out.println(255 - c.getRed());
 			int r = 255 - c.getRed();
 			int g = 255 - c.getGreen();
 			int b = 255 - c.getBlue();
@@ -65,7 +82,7 @@ public class Entity {
 	
 	public void hurt(int damage) {
 		life-=damage;
-		if (hurttime==0) {color = invertColor(color);}
+		//if (hurttime==0) {color = invertColor(color);}
 		hurttime = hurtlength;
 	}
 	

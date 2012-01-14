@@ -13,30 +13,13 @@ public class Bullet extends Entity {
 		this.level = level;
 		color[0] = new Color(255, 245, 230);
 		size = 2;
-		x = ply.x + ply.xlook*4;
-		y = ply.y + ply.ylook*4;
-		dir = getDir((ply.ylook+2)*10+(ply.xlook+2));	
+		x = ply.x + ply.xdir*4;
+		y = ply.y + ply.ydir*4;
+		dir = getDir((ply.ydir+2)*10+(ply.xdir+2));	
 		dir += offset;
 		speed = 4;
 		life = 80;
 		owner = ply;
-	}
-	
-	/**To hell with everything about directions.*/
-	private double getDir(int i) {
-		double pi = Math.PI;
-		double out = 0;
-		switch (i) {
-		case 32:out = 0;break;
-		case 31:out = pi/4;break;
-		case 21:out = pi/2;break;
-		case 11:out = pi-pi/4;break;
-		case 12:out = pi;break;
-		case 13:out = pi+pi/4;break;
-		case 23:out = -pi/2;break;
-		case 33:out = -pi/4;break;
-		}
-		return out;
 	}
 
 	protected void isDead() {

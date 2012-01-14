@@ -12,6 +12,7 @@ public class ExploderMob extends Monster {
 		size = 30 + rand.nextInt(11);//0-10
 		color[0] = new Color(30,40,200);
 		speed = 0.3f;
+		damage = 20;
 	}
 
 	protected void isDead() { 
