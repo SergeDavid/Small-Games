@@ -8,6 +8,7 @@ public class RandomMob extends Monster {
 		super(level);
 		size = 3 + rand.nextInt(20);
 		damage = (int) (size/1.5);
+		speed += rand.nextFloat()*2;
 	}
 
 }

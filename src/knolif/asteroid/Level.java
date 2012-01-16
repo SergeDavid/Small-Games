@@ -7,16 +7,13 @@ import java.util.Random;
 
 import knolif.asteroid.effects.Effect;
 import knolif.asteroid.effects.PlayerDeath;
-import knolif.asteroid.entity.BabyChaserMob;
-import knolif.asteroid.entity.ChaserMob;
 import knolif.asteroid.entity.Entity;
 import knolif.asteroid.entity.ExploderMob;
-import knolif.asteroid.entity.HugeMob;
 import knolif.asteroid.entity.Monster;
-import knolif.asteroid.entity.RandomMob;
 
 public class Level {
 	Random rand = new Random();
+	SpawnHandler spawn;
 	public List<Entity> entities;
 	public List<Effect> background;
 	public SimpleGame game;
@@ -31,19 +28,11 @@ public class Level {
 		height = h;
 		entities = new ArrayList<Entity>();
 		background = new ArrayList<Effect>();
+		spawn = new SpawnHandler(this);
 	}
 
 	public void tick() {
-		if (Objects < maxObjects) {
-			if (rand.nextInt(10) == 0) {
-				int r = rand.nextInt(99);
-				Objects++;
-				if (r<14) {entities.add(new ChaserMob(this, game.player));}
-				else if (r<22) {entities.add(new HugeMob(this));}
-				else if (r<30) {entities.add(new ExploderMob(this));}
-				else {entities.add(new RandomMob(this));}
-			}
-		}
+		spawn.SpawnFollowers(entities);
 		for (int i = 0; i < background.size(); i++) {
 			Effect e = background.get(i);
 			e.tick();
@@ -56,12 +45,9 @@ public class Level {
 			Entity e = entities.get(i);
 			e.tick();
 			if (e.remove) {
-				if (e instanceof Monster) {Objects--;}
+				if (e instanceof Monster) {spawn.Objects--;}
 				if (e instanceof ExploderMob) {
-					if (e.blownup)
-					for (int a = 0; a < rand.nextInt(2)+3; a++) {
-						entities.add(new BabyChaserMob(this, game.player, e.x, e.y));
-					}
+					if (e.blownup) spawn.SpawnBabies(entities, e.x, e.y);
 				}
 				entities.remove(i--);
 			} 

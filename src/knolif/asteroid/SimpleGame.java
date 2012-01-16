@@ -16,7 +16,7 @@ public class SimpleGame extends Canvas implements Runnable {
 	public static final String NAME = "Asteroids";
 	public static final int HEIGHT = 120;
 	public static final int WIDTH = 160;
-	private static final int SCALE = 3;
+	private static final int SCALE = 4;
 	private boolean running = false;
 	
 	public int score = 0;

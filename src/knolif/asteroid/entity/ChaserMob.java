@@ -15,11 +15,11 @@ public class ChaserMob extends Monster {
 		this.player = player;
 		size = 8;
 		color[0] = new Color(50,190,50);
-		maxspeed = 0.8f + rand.nextFloat();
+		maxspeed = 0.5f + rand.nextFloat() + rand.nextInt(3);
 		if (maxspeed>1.65f) {maxspeed=1.65f;}
-		speed = 0.1f;
+		speed = 5.1f;
 		damage = 7;
-		distance = 30;
+		distance = 100;
 	}
 	protected void move() {
 		if (player.x > x + distance) {
