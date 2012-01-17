@@ -14,4 +14,11 @@ public class SpriteSheet {
 		rows = img.getWidth()/size;
 		cols = img.getHeight()/size;
 	}
+
+	public int getX(int i, int s) {
+		return ((i%rows)*size);
+	}
+	public int getY(int i, int s) {
+		return ((i/rows)*size);
+	}
 }

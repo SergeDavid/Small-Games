@@ -26,20 +26,23 @@ public class Game extends Canvas implements Runnable {
 	private final static int HEIGHT = 300;
 	private boolean running = false;
 	
+	//Persistant stats between player deaths and level changes
+	public int score;
+	public int lives;
+	
 	public Game() {
 		input = new InputHandler(this);
 		try {
-			screen = new Screen(WIDTH, HEIGHT, new SpriteSheet(ImageIO.read(Game.class.getResourceAsStream("/icon.png"))));
+			screen = new Screen(WIDTH, HEIGHT, new SpriteSheet(ImageIO.read(Game.class.getResourceAsStream("/galagaicon.png"))));
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		restart();
 	}
 	
 	public void restart() {
-		level = new Level(this,HEIGHT,WIDTH);
+		level = new Level(this, screen);
 		player = new Player(level,input);
 	}
 	
@@ -93,7 +96,9 @@ public class Game extends Canvas implements Runnable {
 		}
 		screen.setGraphics((Graphics2D) bs.getDrawGraphics(), getWidth(), getHeight());
 		
-		screen.drawSprite(0, 1, 20, 20);
+		screen.drawSprite(13, 3, 20, 20);
+		screen.drawGUI();
+		
 		level.render(screen);
 		
 		screen.dispose();

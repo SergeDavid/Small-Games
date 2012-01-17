@@ -5,39 +5,27 @@ import knolif.galaga.screen.Screen;
 
 public class Entity {
 	Level level;
-	int x, y;
-	int maxhealth;
-	int health;
+	public int x;
+	public int y;
 	public boolean remove;
-	int speed;//TODO: loosen up the controls with speed up / down?
-	
-	private int immunetime;
-	/**Image location on the spritesheet*/private int image;
-	/**collision size*/private int size;
+	/**Image location on the spritesheet*/protected int image;
+	/**collision size*/public int size;
 	
 	public Entity(Level l) {
 		level = l;
 		remove = false;
-		maxhealth = health = 100;
 		image = 0;
+		size = 1;
 	}
-	
-	void pickup() {}
-	void move() {}
-	void logic() {}
-	public final void tick() {
-		logic();
-		move();
-	}
-	public final void hurt(int damage) {
-		if (immunetime == 0) {
-			health-=damage;
-			if (health<=0) {die();}
-		}
-	}
-	private void die() {
+
+	public void tick() {}
+
+	public void die() {
 		remove = true;
 	}
+	
+	public void interact() {}
+	
 	public final boolean intersects(float ex, float ey, int es) {
 		final double a = size + es;
 	    final double dx = x - ex;
@@ -45,10 +33,7 @@ public class Entity {
 	    return a * a > (dx * dx + dy * dy);
 	}
 	
-	void init() {}
-	
 	public void render(Screen screen) {
-		//TODO: Render sprites and bla bla bla
-		screen.drawSprite(0, 1, x, y);
+		screen.drawSprite(image, size, x, y);
 	}
 }
