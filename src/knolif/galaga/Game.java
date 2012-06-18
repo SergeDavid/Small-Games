@@ -44,6 +44,7 @@ public class Game extends Canvas implements Runnable {
 	public void restart() {
 		level = new Level(this, screen);
 		player = new Player(level,input);
+		screen.player = player;
 	}
 	
 	public void run() {

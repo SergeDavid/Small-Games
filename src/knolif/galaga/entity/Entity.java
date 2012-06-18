@@ -4,7 +4,7 @@ import knolif.galaga.Level;
 import knolif.galaga.screen.Screen;
 
 public class Entity {
-	Level level;
+	protected Level level;
 	public int x;
 	public int y;
 	public boolean remove;
@@ -17,10 +17,14 @@ public class Entity {
 		image = 0;
 		size = 1;
 	}
+	
+	/**Called in the level.move() method so that movement on entities that stay with the camera work.*/
+	public void moveWithScreen(int s) {}
 
 	public void tick() {}
 
 	public void die() {
+		System.out.println("Wakka" + x + " and " + y);
 		remove = true;
 	}
 	
@@ -36,4 +40,7 @@ public class Entity {
 	public void render(Screen screen) {
 		screen.drawSprite(image, size, x, y);
 	}
+
+	/**Handles what happens if the entity leaves the screen.*/
+	public void offscreen() {die();}
 }
